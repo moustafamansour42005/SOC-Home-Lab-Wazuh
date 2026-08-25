@@ -1,0 +1,37 @@
+<!--
+  SOC Home Lab - Custom Brute Force Detection
+  Based on the project report.
+
+  Rule 100006:
+    Detects Windows Event ID 4625 (failed logon).
+
+  Rule 100005:
+    Correlates 3 failed-logon events within 60 seconds
+    and associates them with the same source IP field.
+
+  NOTE:
+  The report's displayed XML excerpt for Rule 100005 omits the
+  frequency/timeframe tags, while the report text explicitly describes
+  a 3-events/60-seconds threshold. This repository includes those
+  threshold tags so the documented correlation logic is represented
+  as an executable rule.
+-->
+
+<group name="custom_rules,windows,authentication,brute_force,">
+
+  <rule id="100006" level="3">
+    <field name="win.system.eventID">4625</field>
+    <description>Custom Alert: Windows Failed Logon Attempt (Event 4625)</description>
+  </rule>
+
+  <rule id="100005" level="12" frequency="3" timeframe="60">
+    <if_matched_sid>100006</if_matched_sid>
+    <same_field>win.eventdata.ipAddress</same_field>
+    <description>Custom Alert: Hydra Brute Force Attack Detected against Windows Target</description>
+    <mitre>
+      <id>T1110.001</id>
+    </mitre>
+    <group>windows,authentication,brute_force,custom_rules,</group>
+  </rule>
+
+</group>

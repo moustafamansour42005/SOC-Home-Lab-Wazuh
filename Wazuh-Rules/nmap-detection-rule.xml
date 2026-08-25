@@ -1,0 +1,21 @@
+<!--
+  SOC Home Lab - Custom Nmap Detection
+
+  Rule 100010:
+    Detects Windows Event ID 5156 under baseline rule 60103.
+    Mapped to MITRE ATT&CK T1046 - Network Service Discovery.
+-->
+
+<group name="custom_rules,windows,network,reconnaissance,nmap,">
+
+  <rule id="100010" level="12">
+    <if_sid>60103</if_sid>
+    <field name="win.system.eventID">5156</field>
+    <description>Custom Alert: Possible Nmap Network Scan Detected</description>
+    <mitre>
+      <id>T1046</id>
+    </mitre>
+    <group>windows,network,reconnaissance,nmap,custom_rules,</group>
+  </rule>
+
+</group>
