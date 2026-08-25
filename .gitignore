@@ -1,0 +1,33 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Logs
+*.log
+alerts.json
+
+# Wazuh local/runtime files
+*.key
+*.pem
+*.crt
+
+# Sensitive local configuration
+.env
+*.secret
+
+# Large VM files
+*.vmem
+*.vmdk
+*.nvram
+*.vmss
+*.vmsn
